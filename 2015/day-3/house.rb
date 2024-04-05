@@ -1,22 +1,22 @@
 
 class House
 
-    def self.count_receive_present_house(moves)
+    def self.count_receive_present_house(move_directions)
         init_location = [0, 0]
         receive_present_house = [init_location]
         current_location = init_location.dup
-        moves.chars.each do |move|
+        move_directions.chars.each do |direction|
             current_location = current_location.dup
-            if move == "^"
+            if direction == "^"
                 # north
                 current_location[1] += 1
-            elsif move == "v"
+            elsif direction == "v"
                 # south
                 current_location[1] -= 1
-            elsif move == ">"
+            elsif direction == ">"
                 # east
                 current_location[0] += 1
-            elsif move == "<"
+            elsif direction == "<"
                 # west
                 current_location[0] -= 1
             end
