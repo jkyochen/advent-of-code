@@ -1,7 +1,7 @@
 
-class NotQuiteLisp
+class Floor
 
-    def self.take_santa_to_what_floor(instr)
+    def self.take(instr)
         result = 0
         instr.chars.each do |i|
             if i == "("
