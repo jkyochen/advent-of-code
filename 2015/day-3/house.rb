@@ -1,10 +1,11 @@
 
 class House
 
+    START_LOCATION = [0, 0]
+
     def self.count_receive_present_house(move_directions)
-        init_location = [0, 0]
-        receive_present_house = [init_location]
-        current_location = init_location.dup
+        receive_present_house = [START_LOCATION]
+        current_location = START_LOCATION.dup
         move_directions.chars.each do |direction|
             current_location = current_location.dup
             move(direction, current_location)
