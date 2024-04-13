@@ -30,11 +30,10 @@ class FloorTest < Minitest::Test
         assert_equal 5, Floor.first_pos_enter_basement("()())")
     end
 
-    @@puzzle_input = File.read("./puzzle_input.txt")
-
     def test_puzzle_input
-        assert_equal 280, Floor.take(@@puzzle_input)
-        assert_equal 1797, Floor.first_pos_enter_basement(@@puzzle_input)
+        puzzle_input = File.read("./puzzle_input.txt")
+        assert_equal 280, Floor.take(puzzle_input)
+        assert_equal 1797, Floor.first_pos_enter_basement(puzzle_input)
     end
 
 end
