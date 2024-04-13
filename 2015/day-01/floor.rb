@@ -26,7 +26,7 @@ class Floor
                 return i + 1
             end
         end
-        0
+        nil
     end
 
 end
