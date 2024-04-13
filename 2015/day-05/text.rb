@@ -1,6 +1,14 @@
 
 class Text
 
+    def self.count_nice(inputs)
+        inputs.split("\n").count do |i|
+            nice?(i)
+        end
+    end
+
+    private
+
     def self.nice?(strings)
         # 1. at least three vowels (aeiou only)
         return false if strings.count("aeiou") < 3
