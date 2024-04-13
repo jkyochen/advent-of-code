@@ -44,8 +44,17 @@ class LightTest < Minitest::Test
             turn off 499,499 through 500,500")
     end
 
+    def test_turn_on_with_brightness
+        assert_equal 1, Light.deploy_with_brightness("turn on 0,0 through 0,0")
+    end
+
+    def test_toggel_with_brightness
+        assert_equal 2000000, Light.deploy_with_brightness("toggle 0,0 through 999,999")
+    end
+
     def test_puzzle_input
         puzzle_input = File.read("puzzle_input.txt")
         assert_equal 377891, Light.deploy(puzzle_input)
+        assert_equal 14110788, Light.deploy_with_brightness(puzzle_input)
     end
 end
