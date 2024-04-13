@@ -2,24 +2,27 @@
 class BoxWrap
 
     def self.feets(instr)
-        result = 0
-        instr.split("\n").each do |i|
-            l, w, h = i.split("x")
-            result += feet(l.to_i, w.to_i, h.to_i)
+        each(instr) do |l, w, h|
+            feet(l, w, h)
         end
-        result
     end
 
     def self.feets_with_ribbon(instr)
-        result = 0
-        instr.split("\n").each do |i|
-            l, w, h = i.split("x")
-            result += feet_with_ribbon(l.to_i, w.to_i, h.to_i)
+        each(instr) do |l, w, h|
+            feet_with_ribbon(l, w, h)
         end
-        result
     end
 
     private
+
+    def self.each(instr)
+        result = 0
+        instr.split("\n").each do |i|
+            l, w, h = i.split("x")
+            result += yield(l.to_i, w.to_i, h.to_i)
+        end
+        result
+    end
 
     def self.feet_with_ribbon(l, w, h)
         m1, m2 = [l, w, h].min(2)
