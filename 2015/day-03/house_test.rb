@@ -14,4 +14,8 @@ class HouseTest < Minitest::Test
     def test_3
         assert_equal 2, House.count_receive_present_house("^v^v^v^v^v")
     end
+
+    def test_puzzle_input
+        assert_equal 2565, House.count_receive_present_house(File.read("puzzle_input.txt"))
+    end
 end
