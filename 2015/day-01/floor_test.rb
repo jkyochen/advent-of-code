@@ -25,4 +25,9 @@ class FloorTest < Minitest::Test
         assert_equal -3, Floor.take(")())())")
     end
 
+    def test_pos_to_enter_basement
+        assert_equal 1, Floor.first_pos_enter_basement(")")
+        assert_equal 5, Floor.first_pos_enter_basement("()())")
+    end
+
 end
