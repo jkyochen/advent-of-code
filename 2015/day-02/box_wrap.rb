@@ -1,5 +1,5 @@
 
-class BoxWrappingPaper
+class BoxWrap
 
     def self.feets(instr)
         result = 0
