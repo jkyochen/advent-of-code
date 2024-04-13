@@ -11,4 +11,9 @@ class AdventCoinTest < Minitest::Test
         assert_equal 1048970, AdventCoin.mining("pqrstuv")
     end
 
+    def test_puzzle_input
+        assert_equal 117946, AdventCoin.mining("ckczppom")
+        assert_equal 3938038, AdventCoin.mining("ckczppom", 6)
+    end
+
 end
