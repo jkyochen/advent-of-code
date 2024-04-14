@@ -8,7 +8,7 @@ class AssemblyTest < Minitest::Test
         assert_nil Assembly.provided_to("", "a")
     end
 
-    def xtest_simple_circuit
+    def test_simple_circuit
 
         circuit = <<~END
             123 -> x
