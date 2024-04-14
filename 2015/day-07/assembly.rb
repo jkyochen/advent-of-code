@@ -39,32 +39,56 @@ class Assembly
         sub_circuit = circuit_obj[target]
 
         if sub_circuit.include?("AND")
-            s1, s2 = sub_circuit.split("AND")
-            r1 = cal_signal(circuit_obj, s1.strip)
-            r2 = cal_signal(circuit_obj, s2.strip)
-            result = r1 & r2
+            result = self.and(circuit_obj, sub_circuit)
         elsif sub_circuit.include?("OR")
-            s1, s2 = sub_circuit.split("OR")
-            result = cal_signal(circuit_obj, s1.strip) | cal_signal(circuit_obj, s2.strip)
+            result = self.or(circuit_obj, sub_circuit)
         elsif sub_circuit.include?("NOT")
-            n1 = sub_circuit.delete_prefix("NOT")
-            result = ~cal_signal(circuit_obj, n1.strip)
+            result = self.not(circuit_obj, sub_circuit)
         elsif sub_circuit.include?("LSHIFT")
-            m1, move_value = sub_circuit.split("LSHIFT")
-            result = cal_signal(circuit_obj, m1.strip) << move_value.to_i
+            result = self.left_shift(circuit_obj, sub_circuit)
         elsif sub_circuit.include?("RSHIFT")
-            m1, move_value = sub_circuit.split("RSHIFT")
-            result = cal_signal(circuit_obj, m1.strip) >> move_value.to_i
+            result = self.right_shift(circuit_obj, sub_circuit)
         else
-            if is_numeric?(sub_circuit)
-                result = sub_circuit.to_i
-            else
-                result = cal_signal(circuit_obj, sub_circuit)
-            end
+            result = self.other(circuit_obj, sub_circuit)
         end
 
         circuit_obj[target] = result.to_s
         result
+    end
+
+    def self.other(circuit_obj, sub_circuit)
+        if is_numeric?(sub_circuit)
+            sub_circuit.to_i
+        else
+            cal_signal(circuit_obj, sub_circuit)
+        end
+    end
+
+    def self.right_shift(circuit_obj, sub_circuit)
+        m1, move_value = sub_circuit.split("RSHIFT")
+        cal_signal(circuit_obj, m1.strip) >> move_value.to_i
+    end
+
+    def self.left_shift(circuit_obj, sub_circuit)
+        m1, move_value = sub_circuit.split("LSHIFT")
+        cal_signal(circuit_obj, m1.strip) << move_value.to_i
+    end
+
+    def self.not(circuit_obj, sub_circuit)
+        n1 = sub_circuit.delete_prefix("NOT")
+        ~cal_signal(circuit_obj, n1.strip)
+    end
+
+    def self.or(circuit_obj, sub_circuit)
+        s1, s2 = sub_circuit.split("OR")
+        cal_signal(circuit_obj, s1.strip) | cal_signal(circuit_obj, s2.strip)
+    end
+
+    def self.and(circuit_obj, sub_circuit)
+        s1, s2 = sub_circuit.split("AND")
+        r1 = cal_signal(circuit_obj, s1.strip)
+        r2 = cal_signal(circuit_obj, s2.strip)
+        r1 & r2
     end
 
     def self.is_numeric?(str)
