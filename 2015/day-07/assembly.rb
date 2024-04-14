@@ -5,7 +5,7 @@ class Assembly
         return nil if circuit.nil? || circuit.empty?
 
         circuit_obj = get_relation(circuit)
-        cal_signal(circuit_obj, target) & 65535
+        format16bit cal_signal(circuit_obj, target)
     end
 
     def self.provided_to_part2(circuit, target)
@@ -14,10 +14,14 @@ class Assembly
         circuit_obj = get_relation(circuit)
         circuit_obj["b"] = provided_to(circuit, target).to_s
 
-        cal_signal(circuit_obj, target) & 65535
+        format16bit cal_signal(circuit_obj, target)
     end
 
     private
+
+    def self.format16bit(v)
+        v & 65535
+    end
 
     def self.get_relation(circuit)
         circuit_obj = {}
