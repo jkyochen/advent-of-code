@@ -4,30 +4,29 @@ class Assembly
     def self.provided_to(circuit, target)
         return nil if circuit.nil? || circuit.empty?
 
-        circuit_obj = {}
-        circuit.split("\n").each do |i|
-            from, to = i.split("->")
-            circuit_obj[to.strip] = from.strip
-        end
-
+        circuit_obj = get_relation(circuit)
         cal_signal(circuit_obj, target) & 65535
     end
 
     def self.provided_to_part2(circuit, target)
         return nil if circuit.nil? || circuit.empty?
 
-        circuit_obj = {}
-        circuit.split("\n").each do |i|
-            from, to = i.split("->")
-            circuit_obj[to.strip] = from.strip
-        end
-
+        circuit_obj = get_relation(circuit)
         circuit_obj["b"] = provided_to(circuit, target).to_s
 
         cal_signal(circuit_obj, target) & 65535
     end
 
     private
+
+    def self.get_relation(circuit)
+        circuit_obj = {}
+        circuit.split("\n").each do |i|
+            from, to = i.split("->")
+            circuit_obj[to.strip] = from.strip
+        end
+        circuit_obj
+    end
 
     def self.cal_signal(circuit_obj, target)
         return target.to_i if is_numeric?(target)
