@@ -9,6 +9,11 @@ class RouteTest < Minitest::Test
             London to Belfast = 518
             Dublin to Belfast = 141
         END
-        assert_equal 605, Route.pick_shortest(data)
+        assert_equal 605, Route.new.pick_shortest(data)
+    end
+
+    def test_puzzle_input
+        puzzle_input = File.read("puzzle_input.txt")
+        assert_equal 251, Route.new.pick_shortest(puzzle_input)
     end
 end

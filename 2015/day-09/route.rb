@@ -3,10 +3,11 @@ require 'set'
 class Route
 
     @@route_regex =/(\w+) to (\w+) = (\d+)/
-    @@citys = Set[]
-    @@list_distance = []
 
-    def self.pick_shortest(data)
+    def pick_shortest(data)
+
+        @citys = Set[] if !@citys
+        @list_distance = [] if !@list_distance
 
         city_obj = {}
         data.split("\n").each do |str|
@@ -16,8 +17,8 @@ class Route
             from_city = match_data[1]
             to_city = match_data[2]
             distance = match_data[3].to_i
-            @@citys << from_city
-            @@citys << to_city
+            @citys << from_city
+            @citys << to_city
 
             city_obj[from_city] = {} if !city_obj[from_city]
             city_obj[to_city] = {} if !city_obj[to_city]
@@ -28,22 +29,22 @@ class Route
 
         pick_route(city_obj)
 
-        @@list_distance.min
+        @list_distance.min
     end
 
     private
 
-    def self.pick_route(city_obj)
+    def pick_route(city_obj)
         city_obj.each_pair do |from_city, routes|
             pick_to_city(city_obj, city_obj[from_city], [from_city], 0)
         end
     end
 
-    def self.pick_to_city(city_obj, routes, pick_citys, pick_distance)
+    def pick_to_city(city_obj, routes, pick_citys, pick_distance)
         return if !routes
 
-        if pick_citys.length == @@citys.length
-            @@list_distance << pick_distance
+        if pick_citys.length == @citys.length
+            @list_distance << pick_distance
             return
         end
 
