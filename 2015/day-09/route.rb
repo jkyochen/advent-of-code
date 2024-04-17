@@ -32,6 +32,11 @@ class Route
         @list_distance.min
     end
 
+    def pick_longest(data)
+        pick_shortest(data)
+        @list_distance.max
+    end
+
     private
 
     def pick_route(city_obj)
