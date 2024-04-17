@@ -5,6 +5,18 @@ class Route
     @@route_regex =/(\w+) to (\w+) = (\d+)/
 
     def pick_shortest(data)
+        pick_route(data)
+        @list_distance.min
+    end
+
+    def pick_longest(data)
+        pick_route(data)
+        @list_distance.max
+    end
+
+    private
+
+    def pick_route(data)
 
         @citys = Set[] if !@citys
         @list_distance = [] if !@list_distance
@@ -27,19 +39,6 @@ class Route
             city_obj[to_city][from_city] = distance
         end
 
-        pick_route(city_obj)
-
-        @list_distance.min
-    end
-
-    def pick_longest(data)
-        pick_shortest(data)
-        @list_distance.max
-    end
-
-    private
-
-    def pick_route(city_obj)
         city_obj.each_pair do |from_city, routes|
             pick_to_city(city_obj, city_obj[from_city], [from_city], 0)
         end
