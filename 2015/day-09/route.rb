@@ -47,7 +47,6 @@ class Route
     end
 
     def pick_to_city(routes, pick_citys, pick_distance)
-        return if !routes
 
         if pick_citys.length == @citys.length
             @list_distance = [] if !@list_distance
