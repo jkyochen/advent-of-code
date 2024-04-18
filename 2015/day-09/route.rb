@@ -19,7 +19,6 @@ class Route
     def pick_route(data)
 
         @citys = Set[] if !@citys
-        @list_distance = [] if !@list_distance
 
         @city_obj = {}
         data.split("\n").each do |str|
@@ -51,6 +50,7 @@ class Route
         return if !routes
 
         if pick_citys.length == @citys.length
+            @list_distance = [] if !@list_distance
             @list_distance << pick_distance
             return
         end
