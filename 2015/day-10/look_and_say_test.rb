@@ -12,5 +12,6 @@ class LookAndSayTest < Minitest::Test
 
     def test_puzzle_input
         assert_equal 252594, LookAndSay.say(1113222113, 40).to_s.length
+        assert_equal 3579328, LookAndSay.say(1113222113, 50).to_s.length
     end
 end
