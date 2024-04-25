@@ -13,11 +13,10 @@ class Password
     private
 
     def self.skip_mis_letter(pass)
-        if pass.count('iol') > 0
-            letter_index = mis_letter_index(pass)
-            pass = pass[0..letter_index].succ + 'a'*(pass.length-(letter_index+1))
-        end
-        pass
+        return pass if pass.count('iol').zero?
+
+        letter_index = mis_letter_index(pass)
+        pass[0..letter_index].succ + 'a'*(pass.length-(letter_index+1))
     end
 
     def self.mis_letter_index(pass)
