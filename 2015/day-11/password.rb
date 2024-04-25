@@ -2,38 +2,39 @@
 class Password
 
     def self.next(old)
+        pass = old
         loop do
-            old = old.succ
-            old = skip_mis_letter(old)
-            return old if check_pass(old)
+            pass = pass.succ
+            pass = skip_mis_letter(pass)
+            return pass if check_pass(pass)
         end
     end
 
     private
 
-    def self.skip_mis_letter(old)
-        if old.count('iol') > 0
-            letter_index = mis_letter_index(old)
-            old = old[0..letter_index].succ + 'a'*(old.length-(letter_index+1))
+    def self.skip_mis_letter(pass)
+        if pass.count('iol') > 0
+            letter_index = mis_letter_index(pass)
+            pass = pass[0..letter_index].succ + 'a'*(pass.length-(letter_index+1))
         end
-        old
+        pass
     end
 
-    def self.mis_letter_index(picks)
-        picks.index("i") || picks.index("o") || picks.index("l")
+    def self.mis_letter_index(pass)
+        pass.index("i") || pass.index("o") || pass.index("l")
     end
 
-    def self.check_pass(picks)
-        return false if !check_inc_three_letter(picks)
-        return false if !check_two_repeat_pair_letter(picks)
+    def self.check_pass(pass)
+        return false if !check_inc_three_letter(pass)
+        return false if !check_two_repeat_pair_letter(pass)
         true
     end
 
-    def self.check_two_repeat_pair_letter(picks)
+    def self.check_two_repeat_pair_letter(pass)
         count = 0
         i = 0
-        while i < picks.length-1
-            next i += 1 if picks[i] != picks[i+1]
+        while i < pass.length-1
+            next i += 1 if pass[i] != pass[i+1]
 
             count += 1
             i += 2
@@ -42,9 +43,9 @@ class Password
         false
     end
 
-    def self.check_inc_three_letter(picks)
-        for i in 0...picks.length-2
-            return true if picks[i].succ == picks[i+1] && picks[i].succ.succ == picks[i+2]
+    def self.check_inc_three_letter(pass)
+        for i in 0...pass.length-2
+            return true if pass[i].succ == pass[i+1] && pass[i].succ.succ == pass[i+2]
         end
         false
     end
