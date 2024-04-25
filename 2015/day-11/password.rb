@@ -4,6 +4,7 @@ class Password
     def self.next(old)
         pass = old
         loop do
+            break if pass.length > old.length
             pass = pass.succ
             pass = skip_mis_letter(pass)
             return pass if check_pass(pass)
