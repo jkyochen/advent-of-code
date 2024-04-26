@@ -3,32 +3,24 @@ require_relative 'box_wrap.rb'
 
 class BoxWrapTest < Minitest::Test
 
-    def test_1
+    def test_basic
         assert_equal 58, BoxWrap.feets("2x3x4")
-    end
-
-    def test_2
         assert_equal 43, BoxWrap.feets("1x1x10")
-    end
-
-    def test_3
-        assert_equal 58+43, BoxWrap.feets("
+        data = <<~END
             2x3x4
-            1x1x10")
+            1x1x10
+        END
+        assert_equal 58+43, BoxWrap.feets(data)
     end
 
-    def test_with_ribbon1
+    def test_with_ribbon
         assert_equal 34, BoxWrap.feets_with_ribbon("2x3x4")
-    end
-
-    def test_with_ribbon2
         assert_equal 14, BoxWrap.feets_with_ribbon("1x1x10")
-    end
-
-    def test_with_ribbon3
-        assert_equal 34+14, BoxWrap.feets_with_ribbon("
+        data = <<~END
             2x3x4
-            1x1x10")
+            1x1x10
+        END
+        assert_equal 34+14, BoxWrap.feets_with_ribbon(data)
     end
 
     def test_puzzle_input
