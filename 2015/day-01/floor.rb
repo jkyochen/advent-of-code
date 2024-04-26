@@ -14,15 +14,15 @@ class Floor
     end
 
     def self.first_pos_enter_basement(instr)
-        result = 0
+        floor_level = 0
         instr.chars.each_with_index do |e, i|
             if e == "("
-                result += 1
+                floor_level += 1
             elsif e == ")"
-                result -= 1
+                floor_level -= 1
             end
 
-            if result == -1
+            if floor_level == -1
                 return i + 1
             end
         end
