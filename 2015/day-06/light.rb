@@ -6,7 +6,6 @@ class Light
         light_status = Array.new(1000) { Array.new(1000, false) }
 
         instructions.split("\n").each do |inst|
-            inst = inst.strip
             if inst.start_with?("turn on")
                 change_status(inst, "turn on") do |x, y|
                     light_status[x][y] = true
