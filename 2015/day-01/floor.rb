@@ -2,15 +2,15 @@
 class Floor
 
     def self.take(instr)
-        result = 0
-        instr.chars.each do |e|
+        instr.chars.map do |e|
             if e == "("
-                result += 1
+                1
             elsif e == ")"
-                result -= 1
+                -1
+            else
+                0
             end
-        end
-        result
+        end.sum
     end
 
     def self.first_pos_enter_basement(instr)
