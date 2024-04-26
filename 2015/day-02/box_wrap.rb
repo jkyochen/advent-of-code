@@ -16,12 +16,10 @@ class BoxWrap
     private
 
     def self.each(instr)
-        result = 0
-        instr.split("\n").each do |i|
+        instr.split("\n").map do |i|
             l, w, h = i.split("x")
-            result += yield(l.to_i, w.to_i, h.to_i)
-        end
-        result
+            yield(l.to_i, w.to_i, h.to_i)
+        end.sum
     end
 
     def self.feet_with_ribbon(l, w, h)
