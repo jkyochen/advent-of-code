@@ -21,6 +21,7 @@ class Olympics
     def get_player(info)
         md = REINDEER_RE.match(info)
         {
+            name: md[1].to_i,
             speed: md[2].to_i,
             run_time: md[3].to_i,
             sleep_time: md[4].to_i,
