@@ -7,12 +7,12 @@ class Olympics
     end
 
     def win_km_in_time(time)
-        max = 0
+        max_traveled = 0
         @reindeers_info.split("\n").each do |info|
             distance = cal_distance(time, get_player(info))
-            max = [distance, max].max
+            max_traveled = [distance, max_traveled].max
         end
-        max
+        max_traveled
     end
 
     private

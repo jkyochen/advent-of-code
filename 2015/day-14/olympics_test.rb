@@ -12,6 +12,6 @@ class OlympicsTest < Minitest::Test
 
     def test_puzzle_input
         puzzle_input = File.read("puzzle_input.txt")
-        assert_equal 0, Olympics.new(puzzle_input).win_km_in_time(2503)
+        assert_equal 2660, Olympics.new(puzzle_input).win_km_in_time(2503)
     end
 end
