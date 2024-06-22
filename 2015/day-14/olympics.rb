@@ -2,14 +2,15 @@ class Olympics
 
     REINDEER_RE = /(\w+) can fly (\d+) km\/s for (\d+) seconds, but then must rest for (\d+) seconds./
 
-    def initialize(reindeers_info)
+    def initialize(reindeers_info, limt_time)
         @reindeers_info = reindeers_info
+        @limt_time = limt_time
     end
 
-    def win_km_in_time(time)
+    def win_km_in_time()
         max_traveled = 0
         @reindeers_info.split("\n").each do |info|
-            distance = cal_distance(time, get_player(info))
+            distance = cal_distance(get_player(info))
             max_traveled = [distance, max_traveled].max
         end
         max_traveled
@@ -26,8 +27,8 @@ class Olympics
         }
     end
 
-    def cal_distance(time, p)
-        q, r = time.divmod(p[:run_time] + p[:sleep_time])
+    def cal_distance(p)
+        q, r = @limt_time.divmod(p[:run_time] + p[:sleep_time])
         if r > p[:run_time]
             (q+1)*p[:run_time] * p[:speed]
         else
