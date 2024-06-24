@@ -40,9 +40,8 @@ class Olympics
     def get_max_distance(all_player_status)
         max_distance = 0
         all_player_status.each do |p|
-            if p[:distance] > max_distance
-                max_distance = p[:distance]
-            end
+            next if p[:distance] <= max_distance
+            max_distance = p[:distance]
         end
         max_distance
     end
