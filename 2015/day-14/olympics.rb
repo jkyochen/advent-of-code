@@ -2,33 +2,33 @@ class Olympics
 
     REINDEER_RE = /(\w+) can fly (\d+) km\/s for (\d+) seconds, but then must rest for (\d+) seconds./
 
-    def initialize(reindeers_info, limt_time)
-        @players = reindeers_info.split("\n").map { |info| get_player(info) }
-        @limt_time = limt_time
+    def initialize(reindeers_info, limit)
+        @players = reindeers_info.split("\n").map { |info| parse_player(info) }
+        @limit = limit
     end
 
     def win_km_in_time
         return 0 if @players.empty?
-        max_traveled = 0
+        max = 0
         @players.each do |player|
-            distance = cal_distance(@limt_time, player)
-            max_traveled = [distance, max_traveled].max
+            distance = cal_distance(@limit, player)
+            max = [distance, max].max
         end
-        max_traveled
+        max
     end
 
     def win_point_in_time
-        return 0 if @players.empty? || @limt_time.zero?
-        return @limt_time if @players == 1
+        return 0 if @players.empty? || @limit.zero?
+        return @limit if @players == 1
 
         h = Hash.new(0)
-        @limt_time.times do |i|
+        @limit.times do |i|
             time = i+1
-            all_player_status = get_player_status_in_time(time)
-            max_distance = cal_max_distance(all_player_status)
+            all_points = points_in_time(time)
+            max = max_distance(all_points)
 
-            all_player_status.each do |p|
-                next if p[:distance] != max_distance
+            all_points.each do |p|
+                next if p[:distance] != max
                 h[p[:name]]+=1
             end
         end
@@ -37,26 +37,25 @@ class Olympics
 
     private
 
-    def cal_max_distance(all_player_status)
-        max_distance = 0
-        all_player_status.each do |p|
-            next if p[:distance] <= max_distance
-            max_distance = p[:distance]
+    def max_distance(all_points)
+        max = 0
+        all_points.each do |p|
+            next if p[:distance] <= max
+            max = p[:distance]
         end
-        max_distance
+        max
     end
 
-    def get_player_status_in_time(time)
+    def points_in_time(time)
         @players.map do |player|
-            distance = cal_distance(time, player)
             {
                 name: player[:name],
-                distance: distance,
+                distance: cal_distance(time, player),
             }
         end
     end
 
-    def get_player(info)
+    def parse_player(info)
         md = REINDEER_RE.match(info)
         {
             name: md[1],
