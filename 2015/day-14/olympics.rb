@@ -25,7 +25,7 @@ class Olympics
         @limt_time.times do |i|
             time = i+1
             all_player_status = get_player_status_in_time(time)
-            max_distance = get_max_distance(all_player_status)
+            max_distance = cal_max_distance(all_player_status)
 
             all_player_status.each do |p|
                 next if p[:distance] != max_distance
@@ -37,7 +37,7 @@ class Olympics
 
     private
 
-    def get_max_distance(all_player_status)
+    def cal_max_distance(all_player_status)
         max_distance = 0
         all_player_status.each do |p|
             next if p[:distance] <= max_distance
