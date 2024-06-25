@@ -14,17 +14,12 @@ class Books
     private
 
     def each_sum(data)
-        if data.is_a?(Array)
-            data.sum { |i| each_sum(i) }
-        elsif data.is_a?(String)
-            0
-        elsif data.is_a?(Integer)
-            data
-        else
-            values = data.values
-            return 0 if @filters.any? { |i| values.include?(i) }
-            each_sum(values)
-        end
+        return 0 if data.is_a?(String)
+        return data if data.is_a?(Integer)
+        return data.sum { |i| each_sum(i) } if data.is_a?(Array)
+        return 0 if !data.is_a?(Hash)
+        return 0 if @filters.any? { |i| data.values.include?(i) }
+        each_sum(data.values)
     end
 
 end
