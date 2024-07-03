@@ -17,6 +17,7 @@ class CookieTest < Minitest::Test
         END
         puzzle_input = File.read("puzzle_input.txt")
         assert_equal 103, MFCSAM.new(puzzle_input, ticker_tape).find()
+        assert_equal 103, MFCSAM.new(puzzle_input, ticker_tape).find1()
     end
 
     def xtest_part2

@@ -16,6 +16,16 @@ class MFCSAM
         sues[0][:sue_id]
     end
 
+    def find1
+        @sues_list.each do |sue|
+            is_all_match = @tape_list.all? do |comp, comp_value|
+                next true if sue[comp].nil? || sue[comp] == comp_value
+            end
+            return sue[:sue_id] if is_all_match
+        end
+        -1
+    end
+
     private
 
     def get_sues_info(sues_comps)
