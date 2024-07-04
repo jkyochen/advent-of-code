@@ -2,8 +2,8 @@ require 'minitest/autorun'
 require_relative 'mfcsam.rb'
 
 class CookieTest < Minitest::Test
-    def test_basic
-        ticker_tape = <<~'END'
+
+    TICKER_TAPE = <<~'END'
         children: 3
         cats: 7
         samoyeds: 2
@@ -14,12 +14,15 @@ class CookieTest < Minitest::Test
         trees: 3
         cars: 2
         perfumes: 1
-        END
-        puzzle_input = File.read("puzzle_input.txt")
-        assert_equal 103, MFCSAM.new(puzzle_input, ticker_tape).find()
-        assert_equal 103, MFCSAM.new(puzzle_input, ticker_tape).find1()
+    END
+
+    PUZZLE_INPUT = File.read("puzzle_input.txt")
+
+    def test_basic
+        assert_equal 103, MFCSAM.new(PUZZLE_INPUT, TICKER_TAPE).find
     end
 
-    def xtest_part2
+    def test_basic1
+        assert_equal 103, MFCSAM.new(PUZZLE_INPUT, TICKER_TAPE).find1
     end
 end
