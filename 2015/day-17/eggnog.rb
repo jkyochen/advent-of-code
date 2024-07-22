@@ -15,9 +15,7 @@ class Eggnog
 
     def pick_container(picks, index)
 
-        if picks.sum == @target
-            return @ways+=1
-        end
+        return @ways+=1 if picks.sum == @target
         return if picks.sum > @target
         return if index >= @containers.length
 
