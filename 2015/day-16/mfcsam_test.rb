@@ -25,4 +25,8 @@ class CookieTest < Minitest::Test
     def test_basic1
         assert_equal 103, MFCSAM.new(PUZZLE_INPUT, TICKER_TAPE).find1
     end
+
+    def test_find_part2
+        assert_equal 0, MFCSAM.new(PUZZLE_INPUT, TICKER_TAPE).find_part2
+    end
 end
